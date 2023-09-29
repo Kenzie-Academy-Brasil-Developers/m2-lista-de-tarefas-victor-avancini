@@ -119,6 +119,9 @@ body{
 }
 
 .task__button--remove-task{
+    cursor: pointer;
+    border: none;
+    background: url("./assets/trash-icon.svg") no-repeat center;
 }
 
 .span-urgent::before{
