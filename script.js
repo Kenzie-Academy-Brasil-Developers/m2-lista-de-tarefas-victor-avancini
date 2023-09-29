@@ -10,3 +10,38 @@ const tasks = [
   {title: "Pagar a conta de energia", type: "Urgente"},
   {title: "Assistir a um documentário interessante", type: "Normal"},
 ];
+
+function renderElement(tasks){
+  const ulTaskList = document.querySelector(".tasks__list")
+  for (let i = 0; i < tasks.length; i++){
+    const task = tasks[i];
+    const taskItem = createTaskItem(task)
+    ulTaskList.append(taskItem)
+  }
+}
+
+function createTaskItem(task){
+  const liTaskItem = document.createElement("li");
+  const divTaskInfo = document.createElement("div");
+  const spanTaskType = document.createElement("span");
+  const pTaskTitle = document.createElement("p");
+  const buttonTaskButton = document.createElement("button");
+
+  liTaskItem.append(divTaskInfo, buttonTaskButton)
+  divTaskInfo.append(spanTaskType, pTaskTitle)
+
+  liTaskItem.classList.add("task__item")
+  divTaskInfo.classList.add("task-info__container")
+  if (task.type == "Urgente"){
+    spanTaskType.classList.add("task-type", "span-urgent")
+  } else if (task.type == "Importante"){
+    spanTaskType.classList.add("task-type", "span-important")
+  } else {
+    spanTaskType.classList.add("task-type", "span-normal")
+  }
+  pTaskTitle.innerText = task.title
+  buttonTaskButton.classList.add("task__button--remove-task")
+  return liTaskItem
+}
+
+renderElement(tasks)
