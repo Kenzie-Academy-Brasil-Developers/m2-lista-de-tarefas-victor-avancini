@@ -44,4 +44,13 @@ function createTaskItem(task){
   return liTaskItem
 }
 
-renderElement(tasks)
+const clickButton = document.querySelector(".form__button--add-task")
+
+clickButton.addEventListener("click", function(event){
+  event.preventDefault();
+  const title = document.querySelector("#input_title").value;
+  let type = document.querySelector(".form__input--priority").value;
+  const newTask = {title, type};
+  tasks.push(newTask);
+  renderElement(tasks);
+})
