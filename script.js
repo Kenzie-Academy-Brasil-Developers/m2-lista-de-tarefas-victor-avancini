@@ -13,6 +13,7 @@ const tasks = [
 
 function renderElement(tasks){
   const ulTaskList = document.querySelector(".tasks__list")
+  ulTaskList.innerHTML = "";
   for (let i = 0; i < tasks.length; i++){
     const task = tasks[i];
     const taskItem = createTaskItem(task)
@@ -41,16 +42,28 @@ function createTaskItem(task){
   }
   pTaskTitle.innerText = task.title
   buttonTaskButton.classList.add("task__button--remove-task")
+
+  buttonTaskButton.addEventListener("click", function(event){
+    event.preventDefault()
+    const index = tasks.indexOf(task)
+    tasks.splice(index, 1)
+    liTaskItem.remove()
+  })
   return liTaskItem
 }
 
-const clickButton = document.querySelector(".form__button--add-task")
+const clickButtonAddTask = document.querySelector(".form__button--add-task")
 
-clickButton.addEventListener("click", function(event){
+clickButtonAddTask.addEventListener("click", function(event){
   event.preventDefault();
-  const title = document.querySelector("#input_title").value;
-  let type = document.querySelector(".form__input--priority").value;
+  const inputTitle = document.querySelector("#input_title");
+  const title = inputTitle.value;
+  const typeSelect = document.querySelector(".form__input--priority");
+  type = typeSelect.value;
   const newTask = {title, type};
   tasks.push(newTask);
+  inputTitle.value = "";
+  typeSelect.value = ""; 
+
   renderElement(tasks);
 })
